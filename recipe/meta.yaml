@@ -38,6 +38,8 @@ requirements:
 {% set deselect_tests = deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_func_no_warmup" %}
 {% set deselect_tests = deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_time_func" %}
 {% set deselect_tests = deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_timeit" %}
+# AttributeError: module 'os' has no attribute 'set_blocking'
+{% set deselect_tests = deselect_tests + " --deselect=test_runner.py::TestRunner::test_pipe_with_timeout" %}  # [win]
 
 test:
   imports:
