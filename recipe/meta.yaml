@@ -1,20 +1,6 @@
 {% set name = "pyperf" %}
 {% set version = "2.10.0" %}
-{% set deselect_tests = " --deselect=test_misc.py::MiscTests::test_doc_version" %}
-{% set deselect_tests = 'deselect_tests + " --deselect=test_examples.py::ExampleTests::test_export_csv"' %}
-{% set deselect_tests = 'deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_async_func"' %}
-{% set deselect_tests = 'deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_async_func_with_loop_factory"' %}
-{% set deselect_tests = 'deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_command"' %}
-{% set deselect_tests = 'deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_func"' %}
-{% set deselect_tests = 'deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_func_no_warmup"' %}
-{% set deselect_tests = 'deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_time_func"' %}
-{% set deselect_tests = 'deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_timeit"' %}
-{% set deselect_tests = 'deselect_tests + " --deselect=test_runner.py::TestRunner::test_pipe_with_timeout"' %}  # [win]
 
-# ModuleNotFoundError: No module named 'conf'
-# $PREFIX/bin/python: can't open file '$PREFIX/lib/python3.9/site-packages/doc/examples/export_csv.py': [Errno 2] No such file or directory
-# AssertionError: Regex didn't match: 'Mean \\+- std dev: [0-9.]+ [mun]s \\+- [0-9.]+ [mun]s\\n' not found in ''
-# AttributeError: module 'os' has no attribute 'set_blocking'
 package:
   name: {{ name|lower }}
   version: {{ version }}
@@ -39,6 +25,19 @@ requirements:
   run:
     - python
     - psutil >=5.9.0
+
+# ModuleNotFoundError: No module named 'conf'  
+{% set deselect_tests = " --deselect=test_misc.py::MiscTests::test_doc_version" %}
+# AssertionError: Regex didn't match: 'Mean \\+- std dev: [0-9.]+ [mun]s \\+- [0-9.]+ [mun]s\\n' not found in ''
+{% set deselect_tests = deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_async_func" %}
+{% set deselect_tests = deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_async_func_with_loop_factory" %}
+{% set deselect_tests = deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_command" %}
+{% set deselect_tests = deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_func" %}
+{% set deselect_tests = deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_func_no_warmup" %}
+{% set deselect_tests = deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_time_func" %}
+{% set deselect_tests = deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_timeit" %}
+# AttributeError: module 'os' has no attribute 'set_blocking'
+{% set deselect_tests = deselect_tests + " --deselect=test_runner.py::TestRunner::test_pipe_with_timeout" %}  # [win]
 
 test:
   imports:
