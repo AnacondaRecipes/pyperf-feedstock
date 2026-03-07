@@ -40,6 +40,8 @@ requirements:
 {% set deselect_tests = deselect_tests + " --deselect=test_runner.py::TestRunner::test_pipe_with_timeout" %}  # [win]
 
 test:
+  source_files:
+    - doc/examples
   imports:
     - pyperf
     - pyperf._bench
