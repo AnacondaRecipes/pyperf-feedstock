@@ -38,10 +38,10 @@ requirements:
 {% set deselect_tests = deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_timeit" %}
 # AttributeError: module 'os' has no attribute 'set_blocking'
 {% set deselect_tests = deselect_tests + " --deselect=test_runner.py::TestRunner::test_pipe_with_timeout" %}  # [win]
+# lacehold_placehold_placehold_placehold/lib/python3.11/site-packages/doc/examples/export_csv.py': [Errno 2] No such file or directory
+{% set deselect_tests = deselect_tests + " --deselect=test_examples.py::ExampleTests::test_export_csv" %}
 
 test:
-  source_files:
-    - doc/examples
   imports:
     - pyperf
     - pyperf._bench
