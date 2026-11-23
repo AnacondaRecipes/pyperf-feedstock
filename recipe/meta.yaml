@@ -1,5 +1,5 @@
 {% set name = "pyperf" %}
-{% set version = "2.10.0" %}
+{% set version = "2.11.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,26 +7,25 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: dd93ccfda79214725293e95f1fa6e00cb4a64adcf1326039486d4e1f91caaa62
+  sha256: e53813a2d97dc5a89760cf660dbd1b6a142558fcb6d32b3529c8a6b2d03dbdf8
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - pyperf = pyperf.__main__:main
-  skip: true  # [py<39]
+  skip: true  # [py<311]
 
 requirements:
   host:
     - python
     - pip
-    - wheel
     - setuptools >=61
   run:
     - python
     - psutil >=5.9.0
 
-# ModuleNotFoundError: No module named 'conf'  
+# ModuleNotFoundError: No module named 'conf'
 {% set deselect_tests = " --deselect=test_misc.py::MiscTests::test_doc_version" %}
 # AssertionError: Regex didn't match: 'Mean \\+- std dev: [0-9.]+ [mun]s \\+- [0-9.]+ [mun]s\\n' not found in ''
 {% set deselect_tests = deselect_tests + " --deselect=test_examples.py::ExampleTests::test_bench_async_func" %}
